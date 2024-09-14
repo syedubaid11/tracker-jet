@@ -3,10 +3,14 @@ from flask import Flask, jsonify, request
 import tweepy
 import os
 from dotenv import load_dotenv
+from pytrends.request import TrendReq
+
 
 load_dotenv()
 
 app = Flask(__name__)
+
+pytrends = TrendReq(hl='en-US', tz=360)  # 'hl' is the language and 'tz' is the timezone offset
 
 auth = tweepy.OAuth1UserHandler(
     os.getenv('TWITTER_API_KEY'),
@@ -14,6 +18,7 @@ auth = tweepy.OAuth1UserHandler(
     os.getenv('TWITTER_ACCESS_TOKEN'),
     os.getenv('TWITTER_ACCESS_TOKEN_SECRET')
 )
+
 api = tweepy.API(auth)
 
 @app.route('/')
@@ -33,6 +38,8 @@ def get_trending_account_posts():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-        
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
