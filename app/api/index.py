@@ -52,24 +52,16 @@ def fetch_trends_data():
         # Build the payload with more specific parameters
         pytrends.build_payload(keywords, cat=0, timeframe='today 12-m', geo='US', gprop='')
 
-        # Add a small delay to avoid rate limiting
+        #Added a small delay to avoid rate limiting
         time.sleep(1)
         
         # Fetch interest over time
         interest_over_time_df = pytrends.interest_over_time()
 
-
-        
-        # Add a small delay
-        time.sleep(1)
-        
-        # Fetch related queries
-        
-        # Add a small delay
         time.sleep(1)
         
         # Fetch trending searches
-        trending_searches_df = pytrends.trending_searches(pn='united_states')
+        trending_searches_df = pytrends.trending_searches(pn='india')
         
         
         # Prepare JSON responses with error checking
