@@ -4,6 +4,7 @@ import tweepy
 import os
 from dotenv import load_dotenv
 from pytrends.request import TrendReq
+import time
 
 
 load_dotenv()
@@ -39,7 +40,53 @@ def get_trending_account_posts():
         return jsonify({'error': str(e)}), 500
 
 
+@app.route('/api/test', methods=['GET'])
+def fetch_trends_data():
+    try:
+        # Set up the TrendReq object with a custom timeout
+        pytrends = TrendReq(timeout=(10,25))
+        
+        # Define the keyword(s)
+        keywords = ['Python', 'JavaScript']
 
+        # Build the payload with more specific parameters
+        pytrends.build_payload(keywords, cat=0, timeframe='today 12-m', geo='US', gprop='')
+
+        # Add a small delay to avoid rate limiting
+        time.sleep(1)
+        
+        # Fetch interest over time
+        interest_over_time_df = pytrends.interest_over_time()
+
+
+        
+        # Add a small delay
+        time.sleep(1)
+        
+        # Fetch related queries
+        
+        # Add a small delay
+        time.sleep(1)
+        
+        # Fetch trending searches
+        trending_searches_df = pytrends.trending_searches(pn='united_states')
+        
+        
+        # Prepare JSON responses with error checking
+        interest_over_time_json = interest_over_time_df.to_json() if not interest_over_time_df.empty else {"error": "No interest over time data"}
+        trending_searches_json = trending_searches_df.to_json() if not trending_searches_df.empty else {"error": "No trending searches data"}
+        
+        # Return JSON response
+        return jsonify({
+            "interest_over_time": interest_over_time_json,
+            "trending_searches": trending_searches_json
+        })
+    except Exception as e:
+        # Handle errors
+        return jsonify({"error": str(e), "type": type(e).__name__}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+

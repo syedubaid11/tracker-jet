@@ -21,7 +21,6 @@ export default function Dashboard(){
         <div className="h-screen">
         <Navbar/>
         <Hero/>
-
         </div>
     )
 }
