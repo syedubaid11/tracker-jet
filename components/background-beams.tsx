@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { BackgroundBeams } from "./ui/background-beams";
+import {motion} from 'framer-motion'
 
 export function BackgroundBeamsDemo() {
   return (
@@ -13,6 +14,13 @@ export function BackgroundBeamsDemo() {
         <p className="text-neutral-500 max-w-lg mx-auto my-2 text-sm text-center relative z-10">
         "Your Jet to the Internet’s Hottest Trends"
         </p>
+        <motion.h3 
+          className="cursor-pointer mt-10 relative z-10 text-lg md:text-4xl bg-clip-text text-transparent bg-gradient-to-b from-white to-neutral-600 text-center font-sans font-bold"
+          whileHover={{ scale: 1.1 }}
+          transition={{ ease: "easeOut", stiffness: 400, damping: 10 }}
+        >
+      Get Started ➜
+    </motion.h3>
         
       </div>
       <BackgroundBeams />

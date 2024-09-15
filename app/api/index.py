@@ -40,9 +40,11 @@ def get_trending_account_posts():
         return jsonify({'error': str(e)}), 500
 
 
-@app.route('/api/test', methods=['GET'])
+@app.route('/api/trend', methods=['GET'])
 def fetch_trends_data():
     try:
+
+        trend_value = request.headers.get('Region')
         # Set up the TrendReq object with a custom timeout
         pytrends = TrendReq(timeout=(10,25))
         
@@ -61,7 +63,7 @@ def fetch_trends_data():
         time.sleep(1)
         
         # Fetch trending searches
-        trending_searches_df = pytrends.trending_searches(pn='india')
+        trending_searches_df = pytrends.trending_searches(pn=trend_value)
         
         
         # Prepare JSON responses with error checking
@@ -74,7 +76,6 @@ def fetch_trends_data():
             "trending_searches": trending_searches_json
         })
     except Exception as e:
-        # Handle errors
         return jsonify({"error": str(e), "type": type(e).__name__}), 500
 
 if __name__ == '__main__':
