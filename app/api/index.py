@@ -5,12 +5,13 @@ import os
 from dotenv import load_dotenv
 from pytrends.request import TrendReq
 import time
+from flask_cors import CORS
 
 
 load_dotenv()
 
 app = Flask(__name__)
-
+CORS(app)
 pytrends = TrendReq(hl='en-US', tz=360)  # 'hl' is the language and 'tz' is the timezone offset
 
 auth = tweepy.OAuth1UserHandler(
@@ -55,12 +56,10 @@ def fetch_trends_data():
         pytrends.build_payload(keywords, cat=0, timeframe='today 12-m', geo='US', gprop='')
 
         #Added a small delay to avoid rate limiting
-        time.sleep(1)
         
         # Fetch interest over time
         interest_over_time_df = pytrends.interest_over_time()
 
-        time.sleep(1)
         
         # Fetch trending searches
         trending_searches_df = pytrends.trending_searches(pn=trend_value)
