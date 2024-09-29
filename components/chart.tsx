@@ -11,6 +11,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import { headers } from 'next/headers';
 
 // Register the required Chart.js components
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
@@ -25,17 +26,20 @@ interface ChartData {
   }[];
 }
 
+
 export const LineChart: React.FC = () => {
+  const [region,setRegion]=useState('India')
+  const [keyword,setKeyword]=useState('Technology')
   const [chartData, setChartData] = useState<ChartData | null>(null);
 
   useEffect(() => {
-    // Simulating API call
+ 
     const fetchData = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:5000');
+        const response = await fetch('http://127.0.0.1:5000/api/trend', { headers: { 'Region': `${region}`, 'Keywords': `${keyword}` } });
         const data = await response.json();
 
-        // Assuming the API returns something like:
+        
         // { labels: ['Jan', 'Feb', 'Mar'], data: [65, 59, 80] }
         const formattedData: ChartData = {
           labels: data.labels, // e.g., ['Jan', 'Feb', 'Mar']

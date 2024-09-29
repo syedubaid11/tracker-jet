@@ -14,7 +14,7 @@ export default function Dashboard(){
         <div>
         <Navbar/>
         <Hero/>
-        <Api/>
+        <LineChart/>
  
         </div>
     )
