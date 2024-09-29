@@ -4,31 +4,28 @@ import axios from 'axios'
 
 export const Hero=()=>{
     const [trend,setTrend]=useState([''])
-    const [region,setRegion]=useState("india")
     const [data,setData]=useState([' '])
     const [search,setSearch]=useState([''])
     const [search1,setSearch1]=useState([''])
+    const [region,setRegion]=useState('india')
+    const [keyword,setKeyword]=useState('Technology')
 
-    useEffect(()=>{
-        
-            const fetch=async()=>{
-                try{
-                    const response=await axios.get('http://localhost:5000/api/trend',{
-                        headers:{
-                            'Region':region
-                        }
-                    })
-                    console.log(trend)
-                    setData(response.data)
-                }
-                catch(e){
-                    console.log('error',e)
-                }
+    useEffect(() => {
+        const fetchData = async () => {
+            try{
+                const response = await fetch('http://127.0.0.1:5000/api/trend', { headers: { 'Region': `${region}`, 'Keywords': `${keyword}` } });
+                console.log(response)
+
+
             }
-            fetch();
-        }
-    ,[])
+            catch(e){
+                console.log("Error",e)
+            }
+            
+        };
 
+        fetchData();
+    }, [])
 
 //fetch region details
     const fetchRegionDetails=async()=>{

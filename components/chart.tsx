@@ -26,27 +26,29 @@ interface ChartData {
   }[];
 }
 
+interface LineChartProps{
+    labels:string[],
+    data:number[]
+}
 
-export const LineChart: React.FC = () => {
-  const [region,setRegion]=useState('India')
-  const [keyword,setKeyword]=useState('Technology')
+
+export const LineChart: React.FC <LineChartProps> = (props) => {
+  
   const [chartData, setChartData] = useState<ChartData | null>(null);
 
   useEffect(() => {
  
     const fetchData = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:5000/api/trend', { headers: { 'Region': `${region}`, 'Keywords': `${keyword}` } });
-        const data = await response.json();
-
+        
         
         // { labels: ['Jan', 'Feb', 'Mar'], data: [65, 59, 80] }
         const formattedData: ChartData = {
-          labels: data.labels, // e.g., ['Jan', 'Feb', 'Mar']
+          labels: props.labels, // e.g., ['Jan', 'Feb', 'Mar']
           datasets: [
             {
               label: 'API Data',
-              data: data.data, // e.g., [65, 59, 80]
+              data: props.data, // e.g., [65, 59, 80]
               borderColor: 'rgba(75,192,192,1)',
               backgroundColor: 'rgba(75,192,192,0.2)',
             },
