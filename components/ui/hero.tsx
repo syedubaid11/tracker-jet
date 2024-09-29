@@ -27,14 +27,14 @@ export const Hero=()=>{
 //fetch region details
     const fetchRegionDetails=async()=>{
         try{
-            const response=await axios.get('http://localhost:5000/api/trend',{
+            const response=await axios.get('http://127.0.0.1:5000/api/trend',{
             headers:{
-                'Region':`${region}`
+                'Region':`${region}`,
+                'Keywords': `${keyword}`
             }
         })
-        const responseData = typeof response.data === 'string' ? JSON.parse(response.data) : response.data;
-        setTrend(responseData.trending_searches)
-        console.log(trend)
+        console.log(response.data)
+        
         }
         catch(e){
             console.log("error",e)
