@@ -50,7 +50,8 @@ def fetch_trends_data():
         pytrends = TrendReq(timeout=(10,25))
         
         # Define the keyword(s)
-        keywords = ['Python', 'JavaScript']
+        keywords_value=request.headers.get('Keywords')
+        keywords = [keywords_value]
 
         # Build the payload with more specific parameters
         pytrends.build_payload(keywords, cat=0, timeframe='today 12-m', geo='US', gprop='')
