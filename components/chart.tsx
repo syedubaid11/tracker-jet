@@ -32,7 +32,7 @@ export const LineChart: React.FC = () => {
     // Simulating API call
     const fetchData = async () => {
       try {
-        const response = await fetch('https://api.example.com/data');
+        const response = await fetch('http://127.0.0.1:5000');
         const data = await response.json();
 
         // Assuming the API returns something like:

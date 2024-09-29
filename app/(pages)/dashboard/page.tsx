@@ -1,5 +1,6 @@
 "use client"
 
+import { Api } from "@/components/api"
 import { LineChart } from "@/components/chart"
 import { Hero } from "@/components/ui/hero"
 import { Navbar } from "@/components/ui/navbar"
@@ -13,6 +14,7 @@ export default function Dashboard(){
         <div>
         <Navbar/>
         <Hero/>
+        <Api/>
  
         </div>
     )
