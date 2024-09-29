@@ -13,8 +13,8 @@ export const Hero=()=>{
     useEffect(() => {
         const fetchData = async () => {
             try{
-                const response = await fetch('http://127.0.0.1:5000/api/trend', { headers: { 'Region': `${region}`, 'Keywords': `${keyword}` } });
-                console.log(response)
+                const response = await axios.get('http://127.0.0.1:5000/api/trend', { headers: { 'Region': `${region}`, 'Keywords': `${keyword}` } });
+                console.log(response.data)
             }
             catch(e){
                 console.log("Error",e)
