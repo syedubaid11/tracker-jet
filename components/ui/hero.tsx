@@ -15,13 +15,10 @@ export const Hero=()=>{
             try{
                 const response = await fetch('http://127.0.0.1:5000/api/trend', { headers: { 'Region': `${region}`, 'Keywords': `${keyword}` } });
                 console.log(response)
-
-
             }
             catch(e){
                 console.log("Error",e)
             }
-            
         };
 
         fetchData();
@@ -58,15 +55,13 @@ export const Hero=()=>{
         catch(e){
             console.log("error",e)
         }
-        
-        
 
     }
     return(
         <div className="flex flex-col h-screen w-screen">
 
             {/*Region*/}
-            <div className="mt-20 border-b flex p-4 items-center w-full">
+            <div className="mt-10 md:mt-20 border-b flex p-4 items-center w-full">
                <p className="mr-5">Region</p>
                 <div>
                     <button onClick={()=>{setRegion("united_states");fetchRegionDetails()}}className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
@@ -88,14 +83,21 @@ export const Hero=()=>{
             </div>
 
 
-          
-        <div className="flex flex-col md:flex-row md:items-center w-screen h-screen">
+            <div className="m-4 text-2xl font-bold">
+                    <p>Categories</p>
+            </div>
+        <div className="flex flex-col md:flex-row md:items-center ">
       
            {/*Sidebar */}
            
-         
-
-
+           <div className="flex flex-row flex-wrap md:flex-col mr-10 mt-5 md:mt-10 md:bg-black rounded-2xl border-2">
+                <button onClick={()=>{fetchDetails()}}className="border bg-white rounded-lg m-2 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">Sports ⚽</button>
+                <button onClick={()=>{fetchDetails()}}className="border bg-white rounded-lg m-2 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">Fitness 🥦</button>
+                <button onClick={()=>{fetchDetails()}}className="border bg-white rounded-lg m-2 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">Technology 🤖</button>
+                <button onClick={()=>{fetchDetails()}}className="border bg-white rounded-lg m-2 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">News 📰</button>
+                <button onClick={()=>{fetchDetails()}}className="border bg-white rounded-lg m-2 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">Fashion 👟</button>
+            </div>
+           
             {/*The trend chart*/}
             <div className="h-max w-max md:w-2/3 border border rounded-lg m-4">
                 <div className="m-2">

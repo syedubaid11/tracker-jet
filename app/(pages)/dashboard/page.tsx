@@ -14,7 +14,7 @@ export default function Dashboard(){
         <div>
         <Navbar/>
         <Hero/>
-        <LineChart/>
+        {/*add props for label and data) <LineChart/>*/}
  
         </div>
     )
