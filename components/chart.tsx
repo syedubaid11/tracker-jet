@@ -1,23 +1,87 @@
-// ChartComponent.jsx
-import React, { useRef, useEffect } from 'react';
-import { Chart, registerables } from 'chart.js';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios'
+import { Line } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
 
-// Register the necessary components for Chart.js
-Chart.register(...registerables);
+// Register the required Chart.js components
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-const ChartComponent = ({ data, options }) => {
-  const chartRef = useRef(null);
+interface ChartData {
+  labels: string[];
+  datasets: {
+    label: string;
+    data: number[];
+    borderColor: string;
+    backgroundColor: string;
+  }[];
+}
+
+export const LineChart: React.FC = () => {
+  const [chartData, setChartData] = useState<ChartData | null>(null);
 
   useEffect(() => {
-    const ctx = chartRef.current.getContext('2d');
-    new Chart(ctx, {
-      type: 'bar', // You can change this to 'line', 'pie', etc.
-      data: data,
-      options: options,
-    });
-  }, [data, options]);
+    // Simulating API call
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://api.example.com/data');
+        const data = await response.json();
 
-  return <canvas ref={chartRef} />;
+        // Assuming the API returns something like:
+        // { labels: ['Jan', 'Feb', 'Mar'], data: [65, 59, 80] }
+        const formattedData: ChartData = {
+          labels: data.labels, // e.g., ['Jan', 'Feb', 'Mar']
+          datasets: [
+            {
+              label: 'API Data',
+              data: data.data, // e.g., [65, 59, 80]
+              borderColor: 'rgba(75,192,192,1)',
+              backgroundColor: 'rgba(75,192,192,0.2)',
+            },
+          ],
+        };
+        
+        setChartData(formattedData);
+      } catch (error) {
+        console.error('Error fetching chart data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // If data is not available yet, show a loading message
+  if (!chartData) {
+    return <div>Loading chart...</div>;
+  }
+
+  return (
+    <div>
+      <h2>API Line Chart</h2>
+      <Line
+        data={chartData}
+        options={{
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'top',
+            },
+            title: {
+              display: true,
+              text: 'Chart.js Line Chart Example',
+            },
+          },
+        }}
+      />
+    </div>
+  );
 };
 
-export default ChartComponent;

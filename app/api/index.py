@@ -25,7 +25,7 @@ api = tweepy.API(auth)
 
 @app.route('/')
 def home():
-    return "Welcome to the Twitter API Backend!"
+    return "Welcome to the Backend!"
 
 @app.route('/api/trending_account_posts', methods=['GET'])
 def get_trending_account_posts():
@@ -54,13 +54,10 @@ def fetch_trends_data():
 
         # Build the payload with more specific parameters
         pytrends.build_payload(keywords, cat=0, timeframe='today 12-m', geo='US', gprop='')
-
-        #Added a small delay to avoid rate limiting
         
         # Fetch interest over time
         interest_over_time_df = pytrends.interest_over_time()
 
-        
         # Fetch trending searches
         trending_searches_df = pytrends.trending_searches(pn=trend_value)
         

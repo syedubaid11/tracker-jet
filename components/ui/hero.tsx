@@ -66,7 +66,7 @@ export const Hero=()=>{
 
     }
     return(
-        <div className="flex flex-col h-screen">
+        <div className="flex flex-col h-screen w-screen">
             <div className="mt-20 border-b flex p-4 items-center">
                <p className="mr-5">Region</p>
                 <div>
@@ -87,8 +87,8 @@ export const Hero=()=>{
                     </button>
                 </div> 
             </div>
-        <div className="flex flex-row">
-            <div className="ml-40 mr-10 mt-20 h-max w-60 bg-black rounded-2xl">
+        <div className="flex flex-row w-screen">
+            <div className="ml-40 mr-10 mt-20 h-max w-60 bg-black rounded-2xl ">
                 <div onClick={()=>{fetchDetails()}}className="border bg-white rounded-lg m-6 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">Sports ⚽</div>
                 <div onClick={()=>{fetchDetails()}}className="border bg-white rounded-lg m-6 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">Fitness 🥦</div>
                 <div onClick={()=>{fetchDetails()}}className="border bg-white rounded-lg m-6 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">Technology 🤖</div>
