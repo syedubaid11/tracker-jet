@@ -67,7 +67,9 @@ export const Hero=()=>{
     }
     return(
         <div className="flex flex-col h-screen w-screen">
-            <div className="mt-20 border-b flex p-4 items-center">
+
+            {/*Region*/}
+            <div className="mt-20 border-b flex p-4 items-center border-2 w-max">
                <p className="mr-5">Region</p>
                 <div>
                     <button onClick={()=>{setRegion("united_states");fetchRegionDetails()}}className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
@@ -87,29 +89,40 @@ export const Hero=()=>{
                     </button>
                 </div> 
             </div>
-        <div className="flex flex-row w-screen">
-            <div className="ml-40 mr-10 mt-20 h-max w-60 bg-black rounded-2xl ">
-                <div onClick={()=>{fetchDetails()}}className="border bg-white rounded-lg m-6 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">Sports ⚽</div>
-                <div onClick={()=>{fetchDetails()}}className="border bg-white rounded-lg m-6 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">Fitness 🥦</div>
-                <div onClick={()=>{fetchDetails()}}className="border bg-white rounded-lg m-6 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">Technology 🤖</div>
-                <div onClick={()=>{fetchDetails()}}className="border bg-white rounded-lg m-6 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">News 📰</div>
-                <div onClick={()=>{fetchDetails()}}className="border bg-white rounded-lg m-6 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">Fashion 👟</div>
+
+
+          
+        <div className="flex flex-col md:flex-row md:items-center w-screen">
+      
+           {/*Sidebar */}
+            <div className="border-2 w-max">
+                <div className="flex flex-wrap md:flex-nowrap flex-row md:flex-col ml-4 w-max md:ml-40 mr-4 mt-20 h-max md:w-60 bg-black rounded-2xl">
+                    <button onClick={()=>{fetchDetails()}}className="border bg-white rounded-lg m-2 md:m-4 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">Sports ⚽</button>
+                    <button onClick={()=>{fetchDetails()}}className="border bg-white rounded-lg m-2 md:m-4 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">Fitness 🥦</button>
+                    <button onClick={()=>{fetchDetails()}}className="border bg-white rounded-lg m-2 md:m-4 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">Technology 🤖</button>
+                    <button onClick={()=>{fetchDetails()}}className="border bg-white rounded-lg m-2 md:m-4 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">News 📰</button>
+                    <button onClick={()=>{fetchDetails()}}className="border bg-white rounded-lg m-2 md:m-4 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">Fashion 👟</button>
+                </div>
             </div>
-            <div className="mr-40 mt-20 h-96 w-2/3 border border rounded-lg">
-                <div className="m-4 text-2xl font-bold">
-                   <p>Top Trends in {region}</p>
-                </div>
-                <div className="border p-4 ml-2 mt-5 mr-2">
-                    Engineers Day
-                </div>
-                <div className="border p-4 ml-2 mt-5 mr-2">
-                    Onam
-                </div>
-                <div className="border p-4 ml-2 mt-5 mr-2">
-                    Real Madrid
-                </div>
-                <div className="border p-4 ml-2 mt-5 mr-2">
-                    Serie A
+
+            {/*The trend chart*/}
+            <div className="h-max w-max md:w-2/3 border border rounded-lg m-4">
+                <div className="m-2">
+                    <div className="m-4 text-2xl font-bold">
+                    <p>Top Trends in {region}</p>
+                    </div>
+                    <div className="border p-4 ml-2 mt-5 mr-2">
+                        Engineers Day
+                    </div>
+                    <div className="border p-4 ml-2 mt-5 mr-2">
+                        Onam
+                    </div>
+                    <div className="border p-4 ml-2 mt-5 mr-2">
+                        Real Madrid
+                    </div>
+                    <div className="border p-4 ml-2 mt-5 mr-2">
+                        Serie A
+                    </div>
                 </div>
             </div>
         </div>    
