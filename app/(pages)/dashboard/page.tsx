@@ -10,10 +10,10 @@ import { useEffect, useState } from "react"
 
 export default function Dashboard(){
     return(
-        <div className="h-screen">
+        <div>
         <Navbar/>
         <Hero/>
-     
+ 
         </div>
     )
 }

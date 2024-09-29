@@ -25,6 +25,7 @@
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18",
     "simplex-noise": "^4.0.3",
+    "tailwind": "^4.0.0",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.168.0",
