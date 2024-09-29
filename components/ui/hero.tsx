@@ -48,7 +48,8 @@ export const Hero=()=>{
         try{
             await axios.get('http://localhost:5000/api/trend',{
             headers:{
-                'Region':`${region}`
+                'Region':`${region}`,
+                'Keywords': `${keyword}`
             }
         })
         }
