@@ -6,8 +6,10 @@ import RegionDropDown from "./regiondropdown"
 import { TrendingSVG } from "./trendingsvg"
 
 export const Hero=()=>{
-    const [trend,setTrend]=useState([''])
-    const [data,setData]=useState([' '])
+    const [trend,setTrend]=useState({})
+    const [Data,setData]=useState("")
+    const[topSearches,settopSearches]=useState([' '])
+
     const [search,setSearch]=useState([''])
     const [search1,setSearch1]=useState([''])
     const [region,setRegion]=useState('india')
@@ -16,9 +18,15 @@ export const Hero=()=>{
 
     useEffect(() => {
         const fetchData = async () => {
-            try{
+            try {
                 const response = await axios.get('http://127.0.0.1:5000/api/trend', { headers: { 'Region': `${region}`, 'Keywords': `${keyword}` } });
-                console.log(response.data)
+                setData(response.data);
+
+                const parsed = JSON.parse(response.data.trending_searches);
+                const topsearches = Object.values(parsed["0"]);
+                const top5= topsearches.splice(0, 5) as string[];
+                settopSearches(top5);
+                setTrend(response.data.trending_searches);
             }
             catch(e){
                 console.log("Error",e)
@@ -26,6 +34,7 @@ export const Hero=()=>{
         };
 
         fetchData();
+        console.log(trend)
     }, [])
 
 //fetch region details
@@ -45,6 +54,10 @@ export const Hero=()=>{
         }
         
     }
+
+ useEffect(()=>{
+    console.log('trend has been updated',topSearches)
+ },[topSearches])   
 
     
 //fetch details of category
@@ -117,16 +130,16 @@ export const Hero=()=>{
                      </div>
                     </div>
                     <div className=" p-4 ml-2 mt-5 mr-2">
-                        Engineers Day
+                        {topSearches[0]}
                     </div>
                     <div className=" p-4 ml-2 mt-5 mr-2">
-                        Onam
+                        {topSearches[1]}
                     </div>
                     <div className=" p-4 ml-2 mt-5 mr-2">
-                        Real Madrid
+                       {topSearches[2]}
                     </div>
                     <div className=" p-4 ml-2 mt-5 mr-2">
-                        Serie A
+                        {topSearches[3]}
                     </div>
                     
                 </div>
