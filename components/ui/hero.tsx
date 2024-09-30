@@ -7,13 +7,11 @@ import { TrendingSVG } from "./trendingsvg"
 
 export const Hero=()=>{
     const [trend,setTrend]=useState({})
+    const [loading,setLoading]=useState(false) //add loading skeleton 
     const [Data,setData]=useState("")
     const[topSearches,settopSearches]=useState([' '])
-
-    const [search,setSearch]=useState([''])
-    const [search1,setSearch1]=useState([''])
-    const [region,setRegion]=useState('india')
-    const [keyword,setKeyword]=useState('Technology')
+    const [region,setRegion]=useState('india')//default region india
+    const [keyword,setKeyword]=useState('Technology')//default keyword is technology
 
 
     useEffect(() => {
@@ -21,12 +19,12 @@ export const Hero=()=>{
             try {
                 const response = await axios.get('http://127.0.0.1:5000/api/trend', { headers: { 'Region': `${region}`, 'Keywords': `${keyword}` } });
                 setData(response.data);
+                setTrend(response.data.trending_searches);
 
                 const parsed = JSON.parse(response.data.trending_searches);
                 const topsearches = Object.values(parsed["0"]);
                 const top5= topsearches.splice(0, 5) as string[];
                 settopSearches(top5);
-                setTrend(response.data.trending_searches);
             }
             catch(e){
                 console.log("Error",e)
