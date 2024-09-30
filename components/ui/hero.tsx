@@ -3,6 +3,7 @@ import { HeroInfo } from "./heroinfo"
 import axios from 'axios'
 import Dropdown from "./dropdown"
 import RegionDropDown from "./regiondropdown"
+import { TrendingSVG } from "./trendingsvg"
 
 export const Hero=()=>{
     const [trend,setTrend]=useState([''])
@@ -107,23 +108,27 @@ export const Hero=()=>{
             
            
             {/*The trend chart*/}
-            <div className="h-max w-max md:w-2/3 border border rounded-lg m-4">
+            <div className="h-max md:w-2/3 border border rounded-lg mt-4 md:m-4">
                 <div className="m-2">
-                    <div className="m-4 text-2xl font-bold">
-                    <p>Top Trends in {region}</p>
+                    <div className="m-4 text-2xl font-bold flex items-center">
+                     <p>Top Trends in {region}</p>
+                     <div className="ml-2">
+                       <TrendingSVG/>
+                     </div>
                     </div>
-                    <div className="border p-4 ml-2 mt-5 mr-2">
+                    <div className=" p-4 ml-2 mt-5 mr-2">
                         Engineers Day
                     </div>
-                    <div className="border p-4 ml-2 mt-5 mr-2">
+                    <div className=" p-4 ml-2 mt-5 mr-2">
                         Onam
                     </div>
-                    <div className="border p-4 ml-2 mt-5 mr-2">
+                    <div className=" p-4 ml-2 mt-5 mr-2">
                         Real Madrid
                     </div>
-                    <div className="border p-4 ml-2 mt-5 mr-2">
+                    <div className=" p-4 ml-2 mt-5 mr-2">
                         Serie A
                     </div>
+                    
                 </div>
             </div>
         </div>    
