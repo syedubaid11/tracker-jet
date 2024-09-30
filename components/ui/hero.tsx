@@ -1,6 +1,8 @@
 import { useEffect , useState} from "react"
 import { HeroInfo } from "./heroinfo"
 import axios from 'axios'
+import Dropdown from "./dropdown"
+import RegionDropDown from "./regiondropdown"
 
 export const Hero=()=>{
     const [trend,setTrend]=useState([''])
@@ -9,6 +11,7 @@ export const Hero=()=>{
     const [search1,setSearch1]=useState([''])
     const [region,setRegion]=useState('india')
     const [keyword,setKeyword]=useState('Technology')
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -64,7 +67,7 @@ export const Hero=()=>{
             {/*Region*/}
             <div className="mt-10 md:mt-20 border-b flex p-4 items-center w-full">
                <p className="mr-5">Region</p>
-                <div>
+                <div className="hidden md:block">
                     <button onClick={()=>{setRegion("united_states");fetchRegionDetails()}}className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
                         <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                         Usa 🇺🇸
@@ -81,6 +84,9 @@ export const Hero=()=>{
                         </span>
                     </button>
                 </div> 
+                <div className="block md:hidden ml-auto mr-10">
+                  <RegionDropDown region={region} region1="India" region2="Usa" region3="United Kingdom "/>
+                </div>
             </div>
 
 
@@ -91,13 +97,14 @@ export const Hero=()=>{
       
            {/*Sidebar */}
            
-           <div className="flex flex-row flex-wrap md:flex-col mr-10 mt-5 md:mt-10 md:bg-black rounded-2xl border-2">
+           <div className="flex flex-row flex-wrap md:flex-col mr-10 mt-5 md:mt-10 md:bg-black rounded-2xl ">
                 <button onClick={()=>{fetchDetails()}}className="border bg-white rounded-lg m-2 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">Sports ⚽</button>
                 <button onClick={()=>{fetchDetails()}}className="border bg-white rounded-lg m-2 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">Fitness 🥦</button>
                 <button onClick={()=>{fetchDetails()}}className="border bg-white rounded-lg m-2 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">Technology 🤖</button>
                 <button onClick={()=>{fetchDetails()}}className="border bg-white rounded-lg m-2 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">News 📰</button>
                 <button onClick={()=>{fetchDetails()}}className="border bg-white rounded-lg m-2 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">Fashion 👟</button>
             </div>
+            
            
             {/*The trend chart*/}
             <div className="h-max w-max md:w-2/3 border border rounded-lg m-4">
