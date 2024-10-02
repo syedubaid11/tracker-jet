@@ -140,7 +140,7 @@ useEffect(()=>{
             </div>
 
             {/*Pie chart*/}
-            <div className="mt-10 md:mt-none flex justify-center md:grow border-2 h-60 md:mr-10 rounded-lg">
+            <div className="mt-10 md:mt-none flex justify-center md:grow  h-60 md:mr-10 rounded-lg">
                 <div>
                   <PieChart labels={topSearches} data={[10,20,30]}/>
                 </div>

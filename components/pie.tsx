@@ -51,7 +51,7 @@ export const PieChart: React.FC<PieChartProps> = (props) => {
   }
 
   return (
-    <div className="w-full border h-full ">
+    <div className="w-full h-full ">
       <Pie
         data={chartData}
         options={{
