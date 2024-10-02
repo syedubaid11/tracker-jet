@@ -94,37 +94,44 @@ useEffect(()=>{
             </div>
 
       
-          
+          {/*Top trends in region*/}
         <div className="flex flex-col border-2 md:flex-row md:items-center ">
-            {/*The trend chart*/}
-            {loading?(
-                <Skeleton/>
-            ):(
-                <div className="h-max md:w-2/3 border border rounded-lg mt-4">
+
+            {/*Regions*/}
+            <div className="h-max md:w-2/3 border border rounded-lg mt-4">
                 <div className="m-2">
                     <div className="m-4 text-2xl font-bold flex items-center">
-                     <p>Top Trends in {region}</p>
-                     <div className="ml-2">
-                       <TrendingSVG/>
-                     </div>
+                        <p>Top Trends in {region}</p>
+                        <div className="ml-2">
+                            <TrendingSVG/>
+                            </div>
                     </div>
-                    <div className=" p-4 ml-2 mt-5 mr-2">
-                        {topSearches[0]}
-                    </div>
-                    <div className=" p-4 ml-2 mt-5 mr-2">
-                        {topSearches[1]}
-                    </div>
-                    <div className=" p-4 ml-2 mt-5 mr-2">
-                       {topSearches[2]}
-                    </div>
-                    <div className=" p-4 ml-2 mt-5 mr-2">
-                        {topSearches[3]}
-                    </div>
+                    
+                    {loading?(
+                        <>
+                        <Skeleton/>
+                        <Skeleton/>
+                        </>
+                    ):(
+                        <div>
+
+                        <div className=" p-4 ml-2 mt-5 mr-2">
+                            {topSearches[0]}
+                        </div>
+                        <div className=" p-4 ml-2 mt-5 mr-2">
+                            {topSearches[1]}
+                        </div>
+                        <div className=" p-4 ml-2 mt-5 mr-2">
+                        {topSearches[2]}
+                        </div>
+                        <div className=" p-4 ml-2 mt-5 mr-2">
+                            {topSearches[3]}
+                        </div>
+                        </div>
+                    )}
+                    
                 </div>
             </div>
-
-            )}
-           
 
             {/*Pie chart*/}
             <div className="mt-10 md:mt-none flex justify-center md:grow  h-60 md:mr-10 rounded-lg">
@@ -132,6 +139,8 @@ useEffect(()=>{
                   <PieChart labels={topSearches} data={[10,20,30]}/>
                 </div>
             </div>
+
+
         </div>
 
 
