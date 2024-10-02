@@ -1,13 +1,11 @@
 import { useEffect , useState} from "react"
-import { HeroInfo } from "./heroinfo"
 import axios from 'axios'
-import Dropdown from "./dropdown"
-import RegionDropDown from "./regiondropdown"
-import { TrendingSVG } from "./trendingsvg"
-import { LineChart } from "../chart"
-import { SearchSvg } from "./searchsvg"
-import { PieChart } from "../pie"
-import { Skeleton } from "./skeleton"
+import RegionDropDown from "./ui/regiondropdown"
+import { TrendingSVG } from "./ui/trendingsvg"
+import { SearchSvg } from "./ui/searchsvg"
+import { PieChart } from "./pie"
+import { Skeleton } from "./ui/skeleton"
+import { LineChart } from "@/tracker-jet/components/chart"
 
 export const Hero=()=>{
     const [trend,setTrend]=useState({})
@@ -95,11 +93,11 @@ useEffect(()=>{
 
       
           {/*Top trends in region*/}
-        <div className="flex flex-col border-2 md:flex-row md:items-center ">
+        <div className="flex flex-col  md:flex-row md:items-center ">
 
             {/*Regions*/}
-            <div className="h-max md:w-2/3 border border rounded-lg mt-4">
-                <div className="m-2">
+            <div className="h-max md:w-2/4 border-r mt-4">
+                <div className="ml-20">
                     <div className="m-4 text-2xl font-bold flex items-center">
                         <p>Top Trends in {region}</p>
                         <div className="ml-2">
@@ -145,7 +143,7 @@ useEffect(()=>{
 
 
         {/*Search by Categories*/}
-        <div className="flex justify-center text-2xl font-bold mt-4">
+        <div className="border-t flex justify-center text-2xl font-bold mt-4">
             <div className="flex items-center">
               <p className="m-2">Search by Categories</p><SearchSvg/>
             </div>
@@ -155,15 +153,15 @@ useEffect(()=>{
         <div className="mt-10 md:mt-none flex justify-center flex-col md:flex-row items-center ">
 
             <div className="flex flex-row flex-wrap md:flex-col md:mr-40 mt-2 md:mt-10  rounded-2xl md:block ">
-                    <button onClick={() => {setKeyword('sports');  }} className="border bg-white rounded-lg m-2 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">Sports ⚽</button>
-                    <button onClick={()=>{setKeyword('fitness');}}className="border bg-white rounded-lg m-2 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">Fitness 🥦</button>
-                    <button onClick={()=>{setKeyword('technology');}}className="border bg-white rounded-lg m-2 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">Technology 🤖</button>
-                    <button onClick={()=>{setKeyword('news');}}className="border bg-white rounded-lg m-2 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">News 📰</button>
-                    <button onClick={()=>{setKeyword('fashion');}}className="border bg-white rounded-lg m-2 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">Fashion 👟</button>
+                <button onClick={() => {setKeyword('sports');  }} className="border bg-white rounded-lg m-2 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">Sports ⚽</button>
+                <button onClick={()=>{setKeyword('fitness');}}className="border bg-white rounded-lg m-2 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">Fitness 🥦</button>
+                <button onClick={()=>{setKeyword('technology');}}className="border bg-white rounded-lg m-2 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">Technology 🤖</button>
+                <button onClick={()=>{setKeyword('news');}}className="border bg-white rounded-lg m-2 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">News 📰</button>
+                <button onClick={()=>{setKeyword('fashion');}}className="border bg-white rounded-lg m-2 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">Fashion 👟</button>
             </div>
-                
+            
             <div className="m-10">
-                    <LineChart labels={['jan','feb','march','april','may','june']} data={[12,10,20,22,42]}/>
+                <LineChart labels={['test','tet','te']} data={[12,10,20,22,42]}/>
             </div>  
 
         </div>
