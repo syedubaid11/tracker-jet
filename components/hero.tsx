@@ -5,7 +5,7 @@ import { TrendingSVG } from "./ui/trendingsvg"
 import { SearchSvg } from "./ui/searchsvg"
 import { PieChart } from "./pie"
 import { Skeleton } from "./ui/skeleton"
-import { LineChart } from "@/tracker-jet/components/chart"
+import { LineChart } from "./chart"
 
 export const Hero=()=>{
     const [trend,setTrend]=useState({})
