@@ -116,16 +116,16 @@ useEffect(()=>{
                         <div>
 
                         <div className=" p-4 ml-2 mt-5 mr-2">
-                            {topSearches[0]}
+                            1. {topSearches[0]}
                         </div>
                         <div className=" p-4 ml-2 mt-5 mr-2">
-                            {topSearches[1]}
+                            2. {topSearches[1]}
                         </div>
                         <div className=" p-4 ml-2 mt-5 mr-2">
-                        {topSearches[2]}
+                            3. {topSearches[2]}
                         </div>
                         <div className=" p-4 ml-2 mt-5 mr-2">
-                            {topSearches[3]}
+                            4. {topSearches[3]}
                         </div>
                         </div>
                     )}
