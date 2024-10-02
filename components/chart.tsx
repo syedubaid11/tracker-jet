@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios'
 import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -11,9 +10,8 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import { headers } from 'next/headers';
 
-// Register the required Chart.js components
+// Register Chart.js components
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 interface ChartData {
@@ -23,66 +21,79 @@ interface ChartData {
     data: number[];
     borderColor: string;
     backgroundColor: string;
+    pointRadius: number;
+    pointBorderWidth: number;
   }[];
 }
 
-interface LineChartProps{
-    labels:string[],
-    data:number[]
+interface LineChartProps {
+  labels: string[];
+  data: number[];
 }
 
-
-export const LineChart: React.FC <LineChartProps> = (props) => {
-  
+export const LineChart: React.FC<LineChartProps> = (props) => {
   const [chartData, setChartData] = useState<ChartData | null>(null);
 
   useEffect(() => {
- 
-    const fetchData = async () => {
-      try {
-        
-        
-        // { labels: ['Jan', 'Feb', 'Mar'], data: [65, 59, 80] }
-        const formattedData: ChartData = {
-          labels: props.labels, // e.g., ['Jan', 'Feb', 'Mar']
-          datasets: [
-            {
-              label: 'API Data',
-              data: props.data, // e.g., [65, 59, 80]
-              borderColor: 'rgba(75,192,192,1)',
-              backgroundColor: 'rgba(75,192,192,0.2)',
-            },
-          ],
-        };
-        
-        setChartData(formattedData);
-      } catch (error) {
-        console.error('Error fetching chart data:', error);
-      }
+    const formattedData: ChartData = {
+      labels: props.labels, // e.g., ['Jan', 'Feb', 'Mar']
+      datasets: [
+        {
+          label: 'Interest Over Time',
+          data: props.data, // e.g., [65, 59, 80]
+          borderColor: '#000', // Black line color
+          backgroundColor: 'rgba(255, 255, 255, 0)', // Transparent background for a minimalist look
+          pointRadius: 3, // Small dots on the graph
+          pointBorderWidth: 1, // Thin border for the points
+        },
+      ],
     };
+    setChartData(formattedData);
+  }, [props.labels, props.data]);
 
-    fetchData();
-  }, []);
-
-  // If data is not available yet, show a loading message
   if (!chartData) {
     return <div>Loading chart...</div>;
   }
 
   return (
-    <div>
-      <h2>API Line Chart</h2>
+    <div className='h-60'>
       <Line
         data={chartData}
         options={{
           responsive: true,
           plugins: {
             legend: {
-              position: 'top',
+              display: false, // Hide legend for a cleaner look
+            },
+            tooltip: {
+              enabled: true, // Minimalist tooltip
             },
             title: {
-              display: true,
-              text: 'Chart.js Line Chart Example',
+              display: false, // No title for a minimalist look
+            },
+          },
+          scales: {
+            x: {
+              grid: {
+                display: false, // Hide grid lines for a minimalist appearance
+              },
+              ticks: {
+                color: '#000', // Black color for x-axis labels
+              },
+            },
+            y: {
+              grid: {
+                display: false, // Hide y-axis grid lines
+              },
+              ticks: {
+                color: '#000', // Black color for y-axis labels
+              },
+            },
+          },
+          elements: {
+            line: {
+              tension: 0.4, // Smooth curves
+              borderWidth: 2, // Thicker line for better visibility
             },
           },
         }}
@@ -90,4 +101,3 @@ export const LineChart: React.FC <LineChartProps> = (props) => {
     </div>
   );
 };
-

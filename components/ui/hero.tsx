@@ -4,6 +4,7 @@ import axios from 'axios'
 import Dropdown from "./dropdown"
 import RegionDropDown from "./regiondropdown"
 import { TrendingSVG } from "./trendingsvg"
+import { LineChart } from "../chart"
 
 export const Hero=()=>{
     const [trend,setTrend]=useState({})
@@ -14,26 +15,26 @@ export const Hero=()=>{
     const [keyword,setKeyword]=useState('Technology')//default keyword is technology
 
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('http://127.0.0.1:5000/api/trend', { headers: { 'Region': `${region}`, 'Keywords': `${keyword}` } });
-                setData(response.data);
-                setTrend(response.data.trending_searches);
+useEffect(() => {
+    const fetchData = async () => {
+        try {
+            const response = await axios.get('http://127.0.0.1:5000/api/trend', { headers: { 'Region': `${region}`, 'Keywords': `${keyword}` } });
+            setData(response.data);
+            setTrend(response.data.trending_searches);
 
-                const parsed = JSON.parse(response.data.trending_searches);
-                const topsearches = Object.values(parsed["0"]);
-                const top5= topsearches.splice(0, 5) as string[];
-                settopSearches(top5);
-            }
-            catch(e){
-                console.log("Error",e)
-            }
-        };
+            const parsed = JSON.parse(response.data.trending_searches);
+            const topsearches = Object.values(parsed["0"]);
+            const top5= topsearches.splice(0, 5) as string[];
+            settopSearches(top5);
+        }
+        catch(e){
+            console.log("Error",e)
+        }
+    };
 
-        fetchData();
-        console.log(trend)
-    }, [])
+    fetchData();
+    console.log(trend)
+}, [])
 
 //fetch region details
 useEffect(()=>{
@@ -110,21 +111,10 @@ useEffect(()=>{
             </div>
 
       
-            <div className="m-4 text-2xl font-bold">
-                    <p>Categories</p>
-            </div>
+          
         <div className="flex flex-col md:flex-row md:items-center ">
       
-           {/*Sidebar */}
            
-           <div className="flex flex-row flex-wrap md:flex-col mr-10 mt-5 md:mt-10 md:bg-black rounded-2xl ">
-                <button onClick={() => { setKeyword('sports');  }} className="border bg-white rounded-lg m-2 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">Sports ⚽</button>
-                <button onClick={()=>{setKeyword('fitness');}}className="border bg-white rounded-lg m-2 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">Fitness 🥦</button>
-                <button onClick={()=>{setKeyword('technology');}}className="border bg-white rounded-lg m-2 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">Technology 🤖</button>
-                <button onClick={()=>{setKeyword('news');}}className="border bg-white rounded-lg m-2 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">News 📰</button>
-                <button onClick={()=>{setKeyword('fashion');}}className="border bg-white rounded-lg m-2 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">Fashion 👟</button>
-            </div>
-            
            
             {/*The trend chart*/}
             <div className="h-max md:w-2/3 border border rounded-lg mt-4 md:m-4">
@@ -147,10 +137,35 @@ useEffect(()=>{
                     <div className=" p-4 ml-2 mt-5 mr-2">
                         {topSearches[3]}
                     </div>
-                    
                 </div>
             </div>
-        </div>    
+
+            {/*Pie chart*/}
+            <div className="flex grow w-fill border-2 h-80 mr-10 rounded-lg">
+                <div>
+                  Pie chart
+                </div>
+            </div>
+            
+            
+        </div> 
+         
+        <div className="m-4 text-2xl font-bold">
+                    <p>Categories</p>
+        </div>
+        {/*Sidebar */}
+           
+        <div className="flex flex-row flex-wrap md:flex-col mr-10 mt-5 md:mt-10 md:bg-black rounded-2xl ">
+                <button onClick={() => { setKeyword('sports');  }} className="border bg-white rounded-lg m-2 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">Sports ⚽</button>
+                <button onClick={()=>{setKeyword('fitness');}}className="border bg-white rounded-lg m-2 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">Fitness 🥦</button>
+                <button onClick={()=>{setKeyword('technology');}}className="border bg-white rounded-lg m-2 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">Technology 🤖</button>
+                <button onClick={()=>{setKeyword('news');}}className="border bg-white rounded-lg m-2 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">News 📰</button>
+                <button onClick={()=>{setKeyword('fashion');}}className="border bg-white rounded-lg m-2 p-2 cursor-pointer hover:bg-neutral-200 flex flex-row justify-center">Fashion 👟</button>
+            </div>
+            
+        <div className="border h-60">
+                <LineChart labels={['jan','feb','march','april','may','june']} data={[12,10,20,22,42]}/>
+        </div>  
 
         </div>
     )
