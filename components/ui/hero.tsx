@@ -7,10 +7,11 @@ import { TrendingSVG } from "./trendingsvg"
 import { LineChart } from "../chart"
 import { SearchSvg } from "./searchsvg"
 import { PieChart } from "../pie"
+import { Skeleton } from "./skeleton"
 
 export const Hero=()=>{
     const [trend,setTrend]=useState({})
-    const [loading,setLoading]=useState(false) //add loading skeleton 
+    const [loading,setLoading]=useState(true) //add loading skeleton 
     const [Data,setData]=useState("")
     const[topSearches,settopSearches]=useState([' '])
     const [region,setRegion]=useState('india')//default region india
@@ -28,6 +29,7 @@ useEffect(() => {
             const topsearches = Object.values(parsed["0"]);
             const top5= topsearches.splice(0, 4) as string[];
             settopSearches(top5);
+            setLoading(false)
         }
         catch(e){
             console.log("Error",e)
@@ -36,28 +38,7 @@ useEffect(() => {
 
     fetchData();
     console.log(trend)
-}, [])
-
-//fetch region details
-useEffect(()=>{
-    const fetchRegionDetails=async()=>{
-        try{
-            const response=await axios.get('http://127.0.0.1:5000/api/trend',{
-            headers:{
-                'Region':`${region}`,
-                'Keywords': `${keyword}`
-            }
-        })
-        console.log(response.data)
-        
-        }
-        catch(e){
-            console.log("error",e)
-        } 
-    }
-    fetchRegionDetails();
-},[region])
-    
+},[region,keyword])
 
  useEffect(()=>{
     console.log('trend has been updated',topSearches)
@@ -91,17 +72,17 @@ useEffect(()=>{
             <div className="mt-10 md:mt-20 border-b flex p-4 items-center w-full">
                <p className="mr-5">Region</p>
                 <div className="hidden md:block">
-                    <button onClick={()=>{setRegion("united_states")}}className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+                    <button onClick={()=>{setRegion("united_states");setLoading(true)}}className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
                         <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                         Usa 🇺🇸
                         </span>
                     </button>
-                    <button onClick={()=>{setRegion("united_kingdom")}} className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+                    <button onClick={()=>{setRegion("united_kingdom");setLoading(true)}} className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
                         <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                         United Kingdom
                         </span>
                     </button>
-                    <button  onClick={()=>{setRegion("india")}} className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+                    <button  onClick={()=>{setRegion("india");setLoading(true)}} className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
                         <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                         India 🇮🇳
                         </span>
@@ -116,7 +97,10 @@ useEffect(()=>{
           
         <div className="flex flex-col border-2 md:flex-row md:items-center ">
             {/*The trend chart*/}
-            <div className="h-max md:w-2/3 border border rounded-lg mt-4">
+            {loading?(
+                <Skeleton/>
+            ):(
+                <div className="h-max md:w-2/3 border border rounded-lg mt-4">
                 <div className="m-2">
                     <div className="m-4 text-2xl font-bold flex items-center">
                      <p>Top Trends in {region}</p>
@@ -138,6 +122,9 @@ useEffect(()=>{
                     </div>
                 </div>
             </div>
+
+            )}
+           
 
             {/*Pie chart*/}
             <div className="mt-10 md:mt-none flex justify-center md:grow  h-60 md:mr-10 rounded-lg">
