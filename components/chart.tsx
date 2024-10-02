@@ -43,8 +43,8 @@ export const LineChart: React.FC<LineChartProps> = (props) => {
           data: props.data, // e.g., [65, 59, 80]
           borderColor: '#000', // Black line color
           backgroundColor: 'rgba(255, 255, 255, 0)', // Transparent background for a minimalist look
-          pointRadius: 3, // Small dots on the graph
-          pointBorderWidth: 1, // Thin border for the points
+          pointRadius: 4, // Slightly larger points for better visibility
+          pointBorderWidth: 2, // Slightly thicker border for points
         },
       ],
     };
@@ -56,26 +56,27 @@ export const LineChart: React.FC<LineChartProps> = (props) => {
   }
 
   return (
-    <div className='h-60'>
+    <div className='w-full h-60 md:h-80 md:w-96'>
       <Line
         data={chartData}
         options={{
           responsive: true,
+          maintainAspectRatio: false, // Ensures the chart adjusts to the container's size
           plugins: {
             legend: {
-              display: false, // Hide legend for a cleaner look
+              display: false, // Hide legend for minimalist look
             },
             tooltip: {
               enabled: true, // Minimalist tooltip
             },
             title: {
-              display: false, // No title for a minimalist look
+              display: false, // No title for minimalist look
             },
           },
           scales: {
             x: {
               grid: {
-                display: false, // Hide grid lines for a minimalist appearance
+                display: false, // Hide x-axis grid lines for cleaner look
               },
               ticks: {
                 color: '#000', // Black color for x-axis labels
@@ -93,7 +94,7 @@ export const LineChart: React.FC<LineChartProps> = (props) => {
           elements: {
             line: {
               tension: 0.4, // Smooth curves
-              borderWidth: 2, // Thicker line for better visibility
+              borderWidth: 3, // Thicker line for better visibility
             },
           },
         }}
