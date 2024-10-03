@@ -10,7 +10,7 @@ import { LineChart } from "./chart"
 export const Hero=()=>{
     const [trend,setTrend]=useState({})
     const [loading,setLoading]=useState(true) //add loading skeleton 
-    const[topSearches,settopSearches]=useState([' '])
+    const[topSearches,settopSearches]=useState([ ])
     const [region,setRegion]=useState('india')//default region india
     const [keyword,setKeyword]=useState('Technology')//default keyword is technology
 
@@ -159,7 +159,7 @@ useEffect(()=>{
             </div>
             
             <div className="m-10">
-                <LineChart labels={['test','tet','te']} data={[12,10,20,22,42]}/>
+                <LineChart labels={topSearches} data={[12,10,20,22,42]}/>
             </div>  
 
         </div>
