@@ -15,7 +15,7 @@ export function BackgroundBeamsDemo() {
         </h1>
         <p></p>
         <p className="text-neutral-500 max-w-lg mx-auto my-2 text-sm text-center relative z-10">
-        "Your Jet to the Internet’s Hottest Trends"
+        &quot;Your Jet to the Internet’s Hottest Trends&quot;
         </p>
         <motion.h3 
           className="cursor-pointer mt-10 relative z-10 text-lg md:text-4xl bg-clip-text text-transparent bg-gradient-to-b from-white to-neutral-600 text-center font-sans font-bold"

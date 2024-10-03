@@ -10,7 +10,6 @@ import { LineChart } from "./chart"
 export const Hero=()=>{
     const [trend,setTrend]=useState({})
     const [loading,setLoading]=useState(true) //add loading skeleton 
-    const [Data,setData]=useState("")
     const[topSearches,settopSearches]=useState([' '])
     const [region,setRegion]=useState('india')//default region india
     const [keyword,setKeyword]=useState('Technology')//default keyword is technology
@@ -20,7 +19,6 @@ useEffect(() => {
     const fetchData = async () => {
         try {
             const response = await axios.get('http://127.0.0.1:5000/api/trend', { headers: { 'Region': `${region}`, 'Keywords': `${keyword}` } });
-            setData(response.data);
             setTrend(response.data.trending_searches);
 
             const parsed = JSON.parse(response.data.trending_searches);
