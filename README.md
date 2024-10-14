@@ -11,6 +11,6 @@ Interactive Charts: Visualize trends using dynamic charts powered by Chart.js.
 ---
 <h1>Tech Stack</h1>
 Frontend: Next.js
-Backend: Flask
-Data Fetching: PyTrends (Python Google Trends API)
+<br>Backend: Flask
+<br>Data Fetching: PyTrends (Python Google Trends API)
 Charts: Chart.js for rendering interactive and dynamic data visualizations
